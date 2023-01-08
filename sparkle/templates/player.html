@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block head%}
+
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid p-5 bg-black text-white text-center">
+<h1>Model sample player</h1>
+<p>{{model}}</p> 
+</div>
+<script type="text/javascript" src="../static/js/wavesurfer.js"></script>
+<script type="module">
+	var wavesurfer = WaveSurfer.create({
+        container: '#waveform',
+        progressColor: 'hsla(200, 100%, 30%, 0.5)',
+        barWidth: 1
+    });
+	wavesurfer.load('../static/sound/{{model | string}}_temp.wav');
+</script>
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <img class="col-12 col-sm-4" src='../static/{{model}}.jpg'>
+        <div class="col-12 col-sm-8">
+            <h1>{{model}}</h1>
+            <button type="button" class="btn btn-primary" onclick="location.href='/player/{{model}}'">RE-generate</button>
+            <br></br>
+            <p>waveform</p>
+            <div id="waveform"></div>
+        </div>
+        <audio class="col-sm-12" style="margin-top: 20px; margin-bottom: 300px;" controls>
+            <source src='../static/sound/{{model}}_temp.wav' type="audio/wav">
+        </audio>
+    </div>
+</div>
+{% endblock %}
